@@ -9,14 +9,6 @@ const multer = require('../middleware/multer-config');
 //********************** ROUTES ********************************* *
 
 
-// Hachage du mot de passe de l'utilisateur, ajout de l'utilisateur à la base de données.
-// router.post('/auth/signup', StuffCtrl.createID);
-
-// Vérification des informations d'identification de l'utilisateur
-// router.post('/auth/login', StuffCtrl.checkID);
-
-
-
 
 // Renvoie un tableau de toutes les sauces de la base de données.
 router.get('/sauces', auth, StuffCtrl.arrayIDs);
@@ -33,7 +25,6 @@ router.post('/sauces', auth, multer, StuffCtrl.addSauce);
 
 
 //Modif sauce
-// const ModifSauces = require('./models/ModifSauces')
 router.put('/sauces/:id', auth, multer, StuffCtrl.modifSauce);
 
 
@@ -46,9 +37,5 @@ router.post('/sauces/:id/like', auth, StuffCtrl.likeSauce)
 
 
 //
-
-
-
-
 
 module.exports = router;

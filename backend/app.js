@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require("helmet");
+const path = require('path');
 
 //Creer une application express
 const app = express();
@@ -15,7 +16,7 @@ const userRoutes = require('./routes/user');
 // ******************* Mongoose ***********************************
 const mongoose = require('mongoose');
 const { signup } = require('./controllers/user');
-mongoose.connect( process.env.SECRETDB ,
+mongoose.connect(process.env.SECRETDB,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -38,10 +39,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 //
-app.use(express.static('public'))
+// app.use(express.static('images'))
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Routes + //Helmet protéger votre application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP
-app.use('/api', helmet(), stuffRoutes);
+app.use('/api/', helmet(), stuffRoutes);
 app.use('/api/auth', helmet(), userRoutes);
 
 
